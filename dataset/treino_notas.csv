@@ -1,6 +1,25 @@
-texto_extraido,tipo_nota
-"Nota Fiscal de Serviço Eletrônica referente ao transporte de cargas com origem em São Paulo.","NFS-e"
-"DANFE referente à venda de produtos para cliente localizado no RJ.","NF-e"
-"FATURA DE LOCAÇÃO - imóvel industrial referente ao mês de abril.","Fatura"
-"AVISO DE DÉBITO - Ref. reembolso administrativo","Aviso de Débito"
-"Nota Fiscal ao consumidor final emitida no varejo.","NFC-e"
+Emissão,Vencimento,Prazo,Fornecedor,CNPJ Fornecedor,CNPJ Cliente,Tipo,Descrição,Forma de Pagamento,Rateio,Nota Débito
+30/05/2025,30/05/2025,0,Desconhecido,27.751.075/0146-25,52.134.798/0015-63,Aviso de Débito,QTD. x VL. UNIT. (R$),,,
+29/05/2025,29/05/2025,0,Desconhecido,05.269.833/0001-76,52.134.798/0015-63,NFFS-e,CSOSN CFOP  UN  QUANT.VALOR,,,
+28/05/2025,28/05/2025,0,Desconhecido,27.751.075/0146-25,52.134.798/0015-63,NFFS-e,QTD. x VL. UNIT. (R$),,,
+29/05/2025,29/05/2025,0,Desconhecido,05.269.833/0001-76,52.134.798/0015-63,NFFS-e,CSOSN CFOP  UN  QUANT.VALOR,,,
+,,,Desconhecido,,,NF-e,Não identificado,,,
+,,,Desconhecido,,,NF-e,Não identificado,,,
+,,,Desconhecido,,,NF-e,Não identificado,,,
+21/05/2025,30/05/2025,9,"LUFT LOGISTICS LTDA
+ROD PRES CASTELO BRANCO",87.689.402/0005-57,06.288.375/0001-85,NF-e,Não identificado,,,
+06/05/2025,30/05/2025,24,"LUFT LOGISTICS LTDA
+SPE",,,NFFS-e,,,,
+,,,Desconhecido,15.001.448/0001-05,52.134.798/0001-68,Aviso de Débito,"90000100002 ALUGUEL UN 1 136,580 136,58",,,
+16/05/2025,16/05/2025,0,"EXIGIBILIDADE DO ISSQN
+N",87.689.402/0001-23,18.587.586/0001-06,Aviso de Débito,"PASSAGENS (EMBCPP1N29999) 0,00 8.022,86 123.140,08 0,00 131.162,94",,,
+,,,Desconhecido,23.373.000/0001-32,87.689.402/0005-57,NFFS-e,"1 UN REEMBOLSO DE DESPESAS C/ PECAS E AVARIAS R$ 9.900,00 R$ 9.900,00",,,
+30/04/2025,17/06/2025,48,Desconhecido,21.314.559/0001-66,06.288.375/0001-85,NFFS-e,"COMPLEMENTO MULTA E/OU INFR.TRÂNSITO         195,23",,,
+03/02/2025,03/02/2025,0,Desconhecido,00.138.981/0001-38,06.288.375/0016-61,Aviso de Débito,Não identificado,,,
+01/02/2025,20/03/2025,47,Desconhecido,06.193.516/0001-86,06.288.375/0001-85,Aviso de Débito,Não identificado,,,
+11/07/2024,30/01/2025,203,Desconhecido,07.527.704/0001-66,06.288.375/0016-61,NFFS-e,"49.600 PALLET PBR 1200X1000 ( USADOS ) 1,88",,,
+03/07/1998,03/07/1998,0,Desconhecido,33.453.598/0177-94,87.689.402/0005-57,NF-e,Não identificado,,,
+01/04/2025,01/04/2025,0,Desconhecido,,,Aviso de Débito,"Serviço detransporte realizado naAmazon nosdias 20/03, 21/03, 27/03 e 28/03/25",,,
+24/05/2025,20/06/2025,27,"EXIGIBILIDADE DO ISSQN
+N",87.689.402/0005-57,03.506.307/0001-57,NFFS-e,"REEMBOLSO COMPRAS CARTAO FUEL CONTROL 0,00 0,00 278.799,09 0,00 278.799,09",,,
+19/04/2025,03/06/2025,45,Desconhecido,45.179.094/0001-46,87.689.402/0001-23,NF-e,ADMINISTRAÇÃO DE DADOS E GERENCIAMENTO DE PAGAMENTOS CONFORME CONTRATO.,,,
