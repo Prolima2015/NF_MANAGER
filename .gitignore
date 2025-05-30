@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Modelos treinados
+modelos/*.pth
+modelos/*.joblib
+
+# Streamlit & Jupyter
+.streamlit/
+.ipynb_checkpoints/
+
+# Ambiente virtual
+venv/
+.env/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
