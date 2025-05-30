@@ -35,17 +35,24 @@ def extract_data_from_pdf(file):
     emissao = ""
     vencimento = ""
 
-    # Identificação do tipo da nota
+    # Identificação do tipo da nota com padrões expandidos
     tipos_detectados = {
-        "NFS-e": ["NFS-e", "SERVIÇO ELETRÔNICA"],
-        "NF-e": ["NF-e", "DANFE"],
+        "NFS-e": ["NFS-e", "SERVIÇO ELETRÔNICA", "NOTA FISCAL DE SERVIÇO"],
+        "NF-e": ["NF-e", "DANFE", "NOTA FISCAL ELETRÔNICA"],
         "NFFS-e": ["FATURA DE SERVIÇOS ELETRÔNICA", "NFFS-e"],
-        "Fatura": ["FATURA DE LOCAÇÃO", "FATURA DE SERVIÇO"],
+        "Fatura": ["FATURA DE LOCAÇÃO", "FATURA DE SERVIÇO", "FATURA"],
         "Aviso de Débito": ["AVISO DE DÉBITO"],
-        "CT-e": ["CONHECIMENTO DE TRANSPORTE ELETRÔNICO"],
-        "NFC-e": ["NFC-e", "CONSUMIDOR"],
-        "NF3-e": ["ENERGIA ELÉTRICA"],
-        "MDF-e": ["MANIFESTO DE DOCUMENTOS FISCAIS"]
+        "CT-e": ["CONHECIMENTO DE TRANSPORTE ELETRÔNICO", "CT-e"],
+        "NFC-e": ["NFC-e", "CONSUMIDOR", "NOTA FISCAL AO CONSUMIDOR"],
+        "NF3-e": ["ENERGIA ELÉTRICA", "NF3-e"],
+        "MDF-e": ["MANIFESTO DE DOCUMENTOS FISCAIS", "MDF-e"],
+        "NFA-e": ["NOTA FISCAL AVULSA"],
+        "Complementar": ["NOTA FISCAL COMPLEMENTAR"],
+        "Exportação": ["NOTA FISCAL DE EXPORTAÇÃO"],
+        "Remessa": ["NOTA FISCAL DE REMESSA"],
+        "Devolução": ["NOTA FISCAL DE DEVOLUÇÃO"],
+        "Anulação": ["NOTA FISCAL DE ANULAÇÃO"],
+        "Consignação": ["VENDA POR CONSIGNAÇÃO"]
     }
 
     for k, v in tipos_detectados.items():
@@ -58,14 +65,17 @@ def extract_data_from_pdf(file):
     if cnpjs:
         cnpj_fornecedor = cnpjs[0]
         if len(cnpjs) > 1:
-            cnpj_cliente = cnpjs[1]
+            if cnpjs[1] != cnpj_fornecedor:
+                cnpj_cliente = cnpjs[1]
+            elif len(cnpjs) > 2:
+                cnpj_cliente = cnpjs[2]
 
-    # Fornecedor
-    fornecedor_match = re.search(r"(\n|\r|\n\r)([A-Z][A-Z\s&ÇÕÁÉÍÚÔÂÃ\-\.]{5,})\n", text)
+    # Fornecedor - tentar encontrar uma linha em maiúsculas com nome comercial
+    fornecedor_match = re.search(r"(?:Raz[aã]o Social|Emitente|Fornecedor)[^\n]*\n([A-Z][A-Z\s&ÇÕÁÉÍÚÔÂÃ\-\.]{5,})", text)
     if fornecedor_match:
-        fornecedor = fornecedor_match.group(2).strip()
+        fornecedor = fornecedor_match.group(1).strip()
 
-    # Datas
+    # Datas - pegar a primeira e última válidas
     datas = re.findall(r"\d{2}/\d{2}/\d{4}", text)
     datas_validas = []
     for d in datas:
@@ -76,14 +86,16 @@ def extract_data_from_pdf(file):
             continue
 
     if datas_validas:
-        emissao = datas_validas[0].strftime("%d/%m/%Y")
-        vencimento = datas_validas[-1].strftime("%d/%m/%Y")
-        prazo = (datas_validas[-1] - datas_validas[0]).days
+        emissao_dt = min(datas_validas)
+        vencimento_dt = max(datas_validas)
+        emissao = emissao_dt.strftime("%d/%m/%Y")
+        vencimento = vencimento_dt.strftime("%d/%m/%Y")
+        prazo = (vencimento_dt - emissao_dt).days
     else:
         prazo = ""
 
     # Descrição
-    descr_match = re.search(r"(?:Descri[cç][aã]o.*?)[:\-\n](.*?)(\n|$)", text, re.IGNORECASE)
+    descr_match = re.search(r"(?:Descri[cç][aã]o|Objeto|Referente ao)[^\n:]*[:\-\n](.*?)(\n|$)", text, re.IGNORECASE)
     if descr_match:
         descricao = descr_match.group(1).strip()
 
